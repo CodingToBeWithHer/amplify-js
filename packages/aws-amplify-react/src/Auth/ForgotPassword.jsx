@@ -100,6 +100,7 @@ export default class ForgotPassword extends AuthPiece {
         const theme = this.props.theme || AmplifyTheme;
         return (
             <div>
+                {I18n.get('6-digit code has been sent to your email')}
                 <Input
                     placeholder={I18n.get('Code')}
                     theme={theme}
