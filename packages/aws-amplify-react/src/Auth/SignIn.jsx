@@ -72,6 +72,7 @@ export default class SignIn extends AuthPiece {
             .then(data => {
                 if (!JS.isEmpty(data.verified)) {
                     this.changeState('signedIn', user);
+                    console.log('redirect here to the redirect uri, also check if the uri is one of the whitelisted uris');
                 } else {
                     user = Object.assign(user, data);
                     this.changeState('verifyContact', user);
