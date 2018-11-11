@@ -91,6 +91,7 @@ export default class ConfirmSignUp extends AuthPiece {
 
                     <FormField theme={theme}>
                         <InputLabel>{I18n.get('Confirmation Code')} *</InputLabel>
+                        {I18n.get('6-digit code has been sent to your email')}
                         <Input
                             autoFocus
                             placeholder={I18n.get('Enter your code')}
