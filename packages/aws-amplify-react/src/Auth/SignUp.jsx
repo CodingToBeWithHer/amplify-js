@@ -41,12 +41,13 @@ export default class SignUp extends AuthPiece {
         this.signUp = this.signUp.bind(this);
 
         this.inputs = {
-            dial_code: "+1",
+            dial_code: "+90",
         };
     }
 
     signUp() {
-        const { username, password, email, dial_code='+1', phone_line_number } = this.inputs;
+        const { /*username,*/ password, email, dial_code='+90', phone_line_number } = this.inputs;
+        const username = email;
         if (!Auth || typeof Auth.signUp !== 'function') {
             throw new Error('No Auth module found, please ensure @aws-amplify/auth is imported');
         }
@@ -79,6 +80,7 @@ export default class SignUp extends AuthPiece {
             <FormSection theme={theme}>
                 <SectionHeader theme={theme}>{I18n.get('Create a new account')}</SectionHeader>
                 <SectionBody theme={theme}>
+                    {/*
                     <FormField theme={theme}>
                         <InputLabel>{I18n.get('Username')} *</InputLabel>
                         <Input
@@ -87,6 +89,18 @@ export default class SignUp extends AuthPiece {
                             theme={theme}
                             key="username"
                             name="username"
+                            onChange={this.handleInputChange}
+                        />
+                    </FormField>
+                    */}
+                    
+                     <FormField theme={theme}>
+                        <InputLabel>{I18n.get('Email Address')} *</InputLabel>
+                        <Input
+                            placeholder="janedoe@email.com"
+                            theme={theme}
+                            key="email"
+                            name="email"
                             onChange={this.handleInputChange}
                         />
                     </FormField>
@@ -101,20 +115,11 @@ export default class SignUp extends AuthPiece {
                             onChange={this.handleInputChange}
                         />
                     </FormField>
-                    <FormField theme={theme}>
-                        <InputLabel>{I18n.get('Email Address')} *</InputLabel>
-                        <Input
-                            placeholder="janedoe@email.com"
-                            theme={theme}
-                            key="email"
-                            name="email"
-                            onChange={this.handleInputChange}
-                        />
-                    </FormField>
+
                     <FormField theme={theme}>
                         <InputLabel>{I18n.get('Phone Number')}</InputLabel>
                         <SelectInput theme={theme}>
-                            <select key="dial_code" name="dial_code" defaultValue="+1" onChange={this.handleInputChange}>
+                            <select key="dial_code" name="dial_code" defaultValue="+90" onChange={this.handleInputChange}>
                                 {countryDialCodes.map(dialCode =>
                                     <option key={dialCode} value={dialCode}>
                                         {dialCode}
@@ -138,7 +143,7 @@ export default class SignUp extends AuthPiece {
                         </Button>
                     </SectionFooterPrimaryContent>
                     <SectionFooterSecondaryContent theme={theme}>
-                        {I18n.get('Have an account27? ')}
+                        {I18n.get('Have an account? ')}
                         <Link theme={theme} onClick={() => this.changeState('signIn')}>
                             {I18n.get('Sign in')}
                         </Link>
