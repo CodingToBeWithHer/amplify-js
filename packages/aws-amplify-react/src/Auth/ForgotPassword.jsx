@@ -82,10 +82,10 @@ export default class ForgotPassword extends AuthPiece {
         return (
             <div>
                 <FormField theme={theme}>
-                    <InputLabel>{I18n.get('Username')} *</InputLabel>
+                    <InputLabel>{I18n.get('Email')} *</InputLabel>
                     <Input
                         autoFocus
-                        placeholder={I18n.get('Enter your username')}
+                        placeholder={I18n.get('Enter your email')}
                         theme={theme}
                         key="username"
                         name="username"
