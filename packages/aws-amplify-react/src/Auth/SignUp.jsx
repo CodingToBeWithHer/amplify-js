@@ -138,7 +138,7 @@ export default class SignUp extends AuthPiece {
                         </Button>
                     </SectionFooterPrimaryContent>
                     <SectionFooterSecondaryContent theme={theme}>
-                        {I18n.get('Have an account? ')}
+                        {I18n.get('Have an account27? ')}
                         <Link theme={theme} onClick={() => this.changeState('signIn')}>
                             {I18n.get('Sign in')}
                         </Link>
