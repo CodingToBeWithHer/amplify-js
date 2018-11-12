@@ -87,7 +87,11 @@ export default class SignIn extends AuthPiece {
                       return decodeURIComponent(results[2].replace(/\+/g, " "));
                     }
 
-                    window.location.href = getParameterByName('redirect_uri') + '#refresh_token=' 
+                    var userId = localStorage.getItem("CognitoIdentityServiceProvider.2phg5joqfatm2n8cu9cmisepv6.LastAuthUser")
+                    var refreshToken = localStorage.getItem('CognitoIdentityServiceProvider.2phg5joqfatm2n8cu9cmisepv6.' + userId + '.refreshToken') 
+                    var IdToken = localStorage.getItem('CognitoIdentityServiceProvider.2phg5joqfatm2n8cu9cmisepv6.' + userId + '.IdToken')
+
+                    window.location.href = getParameterByName('redirect_uri') + '#refresh_token=' + refreshToken + '&id_token=' + IdToken;
 
                 } else {
                     user = Object.assign(user, data);
