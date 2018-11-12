@@ -72,7 +72,23 @@ export default class SignIn extends AuthPiece {
             .then(data => {
                 if (!JS.isEmpty(data.verified)) {
                     this.changeState('signedIn', user);
+                    
+                    //added by me to redirect the user to the correct url (apps/portal url for correct environment)
                     console.log('redirect here to the redirect uri, also check if the uri is one of the whitelisted uris');
+
+                    const getParameterByName = function(name, url) {
+                      // https://stackoverflow.com/a/901144/5519939
+                      if (!url) url = window.location.href;
+                      name = name.replace(/[[\]]/g, "\\$&");
+                      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                        results = regex.exec(url);
+                      if (!results) return null;
+                      if (!results[2]) return '';
+                      return decodeURIComponent(results[2].replace(/\+/g, " "));
+                    }
+
+                    window.location.href = getParameterByName('redirect_uri') + '#refresh_token=' 
+
                 } else {
                     user = Object.assign(user, data);
                     this.changeState('verifyContact', user);
