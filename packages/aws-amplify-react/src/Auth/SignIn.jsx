@@ -73,26 +73,6 @@ export default class SignIn extends AuthPiece {
                 if (!JS.isEmpty(data.verified)) {
                     this.changeState('signedIn', user);
                     
-                    //added by me to redirect the user to the correct url (apps/portal url for correct environment)
-                    console.log('redirect here to the redirect uri, also check if the uri is one of the whitelisted uris');
-
-                    const getParameterByName = function(name, url) {
-                      // https://stackoverflow.com/a/901144/5519939
-                      if (!url) url = window.location.href;
-                      name = name.replace(/[[\]]/g, "\\$&");
-                      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-                        results = regex.exec(url);
-                      if (!results) return null;
-                      if (!results[2]) return '';
-                      return decodeURIComponent(results[2].replace(/\+/g, " "));
-                    }
-
-                    var userId = localStorage.getItem("CognitoIdentityServiceProvider.2phg5joqfatm2n8cu9cmisepv6.LastAuthUser")
-                    var refreshToken = localStorage.getItem('CognitoIdentityServiceProvider.2phg5joqfatm2n8cu9cmisepv6.' + userId + '.refreshToken') 
-                    var IdToken = localStorage.getItem('CognitoIdentityServiceProvider.2phg5joqfatm2n8cu9cmisepv6.' + userId + '.idToken')
-
-                    window.location.href = getParameterByName('redirect_uri') + '#refresh_token=' + refreshToken + '&id_token=' + IdToken + '&client_id=2phg5joqfatm2n8cu9cmisepv6';
-
                 } else {
                     user = Object.assign(user, data);
                     this.changeState('verifyContact', user);
